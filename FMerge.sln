@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AICore.Utils", "AICore.Utils\AICore.Utils.csproj", "{B74B2010-9FC1-4F08-B11D-9F4A321E1EC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMerge.Web", "FMerge.Web\FMerge.Web.csproj", "{30050422-CD79-4D5F-B3F0-2E9A17F40E65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AICore.Domain", "AICore.Domain\AICore.Domain.csproj", "{95EAC1D3-661A-444D-BC92-47C6F8227592}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B74B2010-9FC1-4F08-B11D-9F4A321E1EC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B74B2010-9FC1-4F08-B11D-9F4A321E1EC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B74B2010-9FC1-4F08-B11D-9F4A321E1EC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B74B2010-9FC1-4F08-B11D-9F4A321E1EC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30050422-CD79-4D5F-B3F0-2E9A17F40E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30050422-CD79-4D5F-B3F0-2E9A17F40E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30050422-CD79-4D5F-B3F0-2E9A17F40E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30050422-CD79-4D5F-B3F0-2E9A17F40E65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95EAC1D3-661A-444D-BC92-47C6F8227592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95EAC1D3-661A-444D-BC92-47C6F8227592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95EAC1D3-661A-444D-BC92-47C6F8227592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95EAC1D3-661A-444D-BC92-47C6F8227592}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
