@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FMerge.Web.Models;
+using AICore.Api.FaceMerge;
+using AICore.Utils;
 
 namespace FMerge.Web.Controllers
 {
@@ -12,6 +14,9 @@ namespace FMerge.Web.Controllers
     {
         public IActionResult Index()
         {
+            //FaceMergeModel sss = FaceMergeApi.getResult();
+            //ViewBag.mm = sss.data.image;
+           ViewBag.mm = QRCodeHelper.getQRCode("abc",100,100);
             return View();
         }
 
