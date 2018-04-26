@@ -17,6 +17,9 @@ namespace FMerge.Web.Controllers
             //FaceMergeModel sss = FaceMergeApi.getResult();
             //ViewBag.mm = sss.data.image;
             ViewBag.kk = ConfigManager.AppSettings("model");
+            var us = new AICore.Domain.Service.UserService();
+            var dt = us.getModel(10);
+            ViewBag.kk2 = dt.Id;
             return View();
         }
 

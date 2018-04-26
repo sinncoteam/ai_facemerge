@@ -47,6 +47,8 @@ namespace FMerge.Web
             });
 
             ConfigManager.SetAppSettings(Configuration.GetSection("AppSettings"));
+
+            ViData.DMHelper.Instance.ExportMapping();
         }
     }
 }

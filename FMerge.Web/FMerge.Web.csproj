@@ -16,6 +16,13 @@
     <ProjectReference Include="..\AICore.Domain\AICore.Domain.csproj" />
     <ProjectReference Include="..\AICore.Utils\AICore.Utils.csproj" />
     <ProjectReference Include="..\AICore.Api\AICore.Api.csproj" />
+
+    <Reference Include="ViCore">
+      <HintPath>..\lib\ViCore.dll</HintPath>
+    </Reference>
+    <Reference Include="ViData">
+      <HintPath>..\lib\ViData.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
