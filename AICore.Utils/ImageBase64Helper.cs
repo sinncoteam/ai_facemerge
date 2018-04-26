@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
+using System.DrawingCore;
+using System.DrawingCore.Imaging;
 using System.IO;
 
 namespace AICore.Utils
@@ -14,7 +15,7 @@ namespace AICore.Utils
         {
                 Bitmap bmp =new Bitmap(Imagefilename);
                 MemoryStream ms = new MemoryStream();
-                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                bmp.Save(ms, ImageFormat.Jpeg);
                 byte[] arr = new byte[ms.Length];
                 ms.Position = 0;
                 ms.Read(arr, 0, (int)ms.Length);
@@ -27,7 +28,7 @@ namespace AICore.Utils
         {
             using(MemoryStream ms = new MemoryStream())
             {
-                file.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                file.Save(ms, ImageFormat.Jpeg);
                 byte[] arr = new byte[ms.Length];
                 ms.Position = 0;
                 ms.Read(arr, 0, (int)ms.Length);
@@ -44,7 +45,7 @@ namespace AICore.Utils
                 MemoryStream ms = new MemoryStream(arr);
                 Bitmap bmp = new Bitmap(ms);
 
-                bmp.Save(@"d:\test.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                bmp.Save(@"d:\test.jpg", ImageFormat.Jpeg);
 
                 ms.Close();
                 return bmp;

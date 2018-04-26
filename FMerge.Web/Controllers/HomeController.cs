@@ -16,7 +16,7 @@ namespace FMerge.Web.Controllers
         {
             //FaceMergeModel sss = FaceMergeApi.getResult();
             //ViewBag.mm = sss.data.image;
-           ViewBag.mm = QRCodeHelper.getQRCode("abc",100,100);
+            ViewBag.kk = ConfigManager.AppSettings("model");
             return View();
         }
 

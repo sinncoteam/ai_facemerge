@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
-    <PackageReference Include="ZXing.Net" Version="0.16.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,7 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AICore.Domain\AICore.Domain.csproj" />
     <ProjectReference Include="..\AICore.Utils\AICore.Utils.csproj" />
-    <ProjectReference Include="..\aicore.api\aicore.api.csproj" />
+    <ProjectReference Include="..\AICore.Api\AICore.Api.csproj" />
   </ItemGroup>
 
 </Project>
