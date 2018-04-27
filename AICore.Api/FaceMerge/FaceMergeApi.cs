@@ -16,7 +16,7 @@ namespace AICore.Api.FaceMerge
             
             //Dictionary<string, string> dict = new Dictionary<string, string>();
             string noces = new Random(DateTime.Now.GetHashCode()).Next(1000000, 100000000).ToString();
-            string fil = HttpRequestHelper.UrlEncode(ImageBase64Helper.ImgToBase64String("e:\\888.jpg"));
+            string fil = HttpRequestHelper.UrlEncode(ImageBase64Helper.ImgToBase64String(filename));
             string stamp = TimeHelper.GetTimeStamp(DateTime.Now, 10);
             //stamp = "1493468759";
             //noces = "fa577ce340859f9fe";
@@ -28,7 +28,7 @@ namespace AICore.Api.FaceMerge
             //dict.Add("nonce_str", noces);
             
             //dict.Add("time_stamp", stamp);
-            string datas = "app_id=" + tpo.app_id + "&image=" + fil + "&model=4&nonce_str=" + noces + "&time_stamp=" + stamp;
+            string datas = "app_id=" + tpo.app_id + "&image=" + fil + "&model="+imgmodel+"&nonce_str=" + noces + "&time_stamp=" + stamp;
             //string k1 = HttpRequestHelper.UrlEncode("腾讯AI开放平台");
             //string k2 = HttpRequestHelper.UrlEncode("示例仅供参考");
             //string datas = "app_id=10000&key1="+ k1+"&key2="+ k2+"&nonce_str=20e3408a79&time_stamp=1493449657";

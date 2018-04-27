@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AICore.Utils\AICore.Utils.csproj" />
+    <ProjectReference Include="..\AICore.Api\AICore.Api.csproj" />
     <Reference Include="ViCore">
       <HintPath>..\lib\ViCore.dll</HintPath>
     </Reference>
