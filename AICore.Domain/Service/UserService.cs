@@ -40,5 +40,6 @@ namespace AICore.Domain.Service
             // }
             return Convert.ToInt32(this.Insert(model));
         }
+
     }
 }

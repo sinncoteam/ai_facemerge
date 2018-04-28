@@ -22,7 +22,7 @@ namespace AICore.Domain.Service
 
         public void PhotoMergeJob()
         {
-            string sql = "select * from t_d_userphotomerge where status = 0 order by id limit 10";
+            string sql = "select * from t_d_userphotomerge where status = 0 and photomodel <> '' order by id limit 10";
             var list = DataHelper.Fill<UserPhotoMergeModel>(sql);
             foreach(var item in list)
             {

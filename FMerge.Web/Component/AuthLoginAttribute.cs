@@ -2,7 +2,10 @@ using System;
 using System.Web;
 using AICore.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
+using FMerge.Web.BaseAI;
+
 
 namespace FMerge.Web.Component
 {
@@ -22,6 +25,17 @@ namespace FMerge.Web.Component
 
             if (!Authentication.Instance.IsLogin)
             {
+                if (filterContext.HttpContext.Request.IsAjax())
+                {
+                    AjaxMsgResult msg = new AjaxMsgResult()
+                    {
+                        success = 0,
+                        code = "-99",
+                        msg = "登录失效"
+                    };
+                    filterContext.Result = new JsonResult(msg);
+                    return;
+                }
                 setoAuth(filterContext, "请先登录");
                 return;
             }
@@ -29,7 +43,7 @@ namespace FMerge.Web.Component
 
         private void setoAuth(ActionExecutingContext filterContext, string msg, int type = 0)
         {
-            
+
             string pq = filterContext.HttpContext.Request.Path;
             // if (filterContext.HttpContext.Request.Path != null)
             // {
@@ -42,10 +56,12 @@ namespace FMerge.Web.Component
             string host = ConfigManager.AppSettings("host");
             //string host = "xianyunsoft.xicp.cn";
             string hostUrl = "http://wxin2.cqnews.net/authorize.aspx?gp=53f6b7a0975642e9801f0d91d6042a70&ga=0682ed39d45745ae879f43d06e267ed0&opa=";
-                hostUrl += HttpUtility.UrlEncode( "http://"+ host +"/wx/reclogin?s="+pq);
-            
+            hostUrl += HttpUtility.UrlEncode("http://" + host + "/wx/reclogin?s=" + pq);
+
             filterContext.Result = new RedirectResult(hostUrl);
-            
+
         }
+
+
     }
 }

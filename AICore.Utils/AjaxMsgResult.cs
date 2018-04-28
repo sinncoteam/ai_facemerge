@@ -7,9 +7,9 @@ namespace AICore.Utils
 {
     public class AjaxMsgResult
     {
-        public bool Success { get; set; }
-        public string Msg { get; set; }
-        public string Code { get; set; }
-        public object Source { get; set; }
+        public int success { get; set; }
+        public string msg { get; set; }
+        public string code { get; set; }
+        public object source { get; set; }
     }
 }

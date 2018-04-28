@@ -51,5 +51,12 @@ namespace AICore.Utils
                 return bmp;
            
         }
+
+        public static string getFileExt(string filename)
+        {
+            string[] strArr = filename.Split('.');
+            string name = strArr[strArr.Length-1];
+            return "."+ name;
+        }
     }
 }

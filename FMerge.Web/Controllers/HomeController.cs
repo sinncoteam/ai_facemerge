@@ -9,18 +9,15 @@ using AICore.Api.FaceMerge;
 using AICore.Utils;
 using Microsoft.AspNetCore.Http;
 using FMerge.Web.Component;
+using AICore.Domain.Model;
 
 namespace FMerge.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        // private IHttpContextAccessor _accessor;
-        // public HomeController(IHttpContextAccessor accessor)
-        // {
-        //     _accessor = accessor;
-        // }
         public IActionResult Index()
         {
+            Authentication.Instance.SetAuth(new UserModel(){ Id = 101, openid ="xxxxxxxxxxx", NickName="长羽生", UserLogo = "http://aaaaaaaaa.com/x.jpg" });
             //FaceMergeModel sss = FaceMergeApi.getResult();
             //ViewBag.mm = sss.data.image;
             // ViewBag.kk = ConfigManager.AppSettings("model");
@@ -30,19 +27,7 @@ namespace FMerge.Web.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
+        
 
         public IActionResult Error()
         {

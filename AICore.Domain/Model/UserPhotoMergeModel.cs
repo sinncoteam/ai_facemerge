@@ -6,6 +6,7 @@ namespace AICore.Domain.Model
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public string openid { get; set; }
 
         public string LocalPhotoUrl { get; set; }
 

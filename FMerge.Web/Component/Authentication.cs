@@ -17,7 +17,7 @@ namespace FMerge.Web.Component
         static Authentication()
         {
         }
-        static UserService omService = new UserService();
+        static UserService x_uService = new UserService();
         private static Authentication instance = new Authentication();
         public static Authentication Instance
         {
@@ -84,10 +84,9 @@ namespace FMerge.Web.Component
             SetSession(uid);
         }
 
-        public void RefreshSession(long userId)
+        public void RefreshSession(int userId)
         {
-            // UserInfo user = omService.GetById(userId);
-            // HttpContext.Current.Session[UserSessionKey] = user;            
+            SetSession(userId);           
         }
 
 
@@ -110,5 +109,6 @@ namespace FMerge.Web.Component
             string umstr = JsonConvert.SerializeObject(um);
             BaseAI.HttpContext.Current.Session.SetString(UserSessionKey,umstr);
         }
+
     }
 }
