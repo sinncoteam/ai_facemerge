@@ -112,15 +112,16 @@ namespace FMerge.Web.Controllers
         public IActionResult setMerge(string openid, int photoid, string photomodel)
         {
             UserPhotoMergeService x_upService = new UserPhotoMergeService();
-            x_upService.Update(() => new UserPhotoMergeModel()
-            {
-                PhotoModel = photomodel
-            }, a => a.Id == photoid && a.openid == openid);
+            // x_upService.Update(() => new UserPhotoMergeModel()
+            // {
+            //     PhotoModel = photomodel
+            // }, a => a.Id == photoid && a.openid == openid);
 
             AjaxMsgResult result = new AjaxMsgResult();
             result.success = 1;
             result.msg = "照片正在合成中，请稍候";
-            result.source = new { realname = CurrentUser.RealName, school = CurrentUser.School, dateyear = CurrentUser.DateYear };
+            //result.source = new { realname = CurrentUser.RealName, school = CurrentUser.School, dateyear = CurrentUser.DateYear };
+            result.source = new { realname = "常玉生", school = "重庆大学", dateyear = "2018" };
             return Json(result);
         }
 
@@ -128,13 +129,16 @@ namespace FMerge.Web.Controllers
         {
             AjaxMsgResult result = new AjaxMsgResult();
             UserPhotoMergeService x_upService = new UserPhotoMergeService();
-            var item = x_upService.Get(a => a.Status == 1 && a.Id == photoid).FirstOrDefault();
-            if (item != null)
-            {
-                result.success = 1;
+            // var item = x_upService.Get(a => a.Status == 1 && a.Id == photoid).FirstOrDefault();
+            // if (item != null)
+            // {
+            //     result.success = 1;
+            //     result.msg = "合成成功";
+            //     result.source = item.PhotoReusltUrl;
+            // }
+            result.success = 1;
                 result.msg = "合成成功";
-                result.source = item.PhotoReusltUrl;
-            }
+                result.source = "/upload/99/xx.jpg";
             return Json(result);
         }
     }
