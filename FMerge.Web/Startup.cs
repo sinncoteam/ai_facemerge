@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using AICore.Domain.Service;
 using AICore.Utils;
 using FMerge.Web.BaseAI;
 using Microsoft.AspNetCore.Builder;
@@ -29,7 +31,7 @@ namespace FMerge.Web
             services.AddSession();
             services.AddHttpContextAccessor();
             services.AddMvc();
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,9 +56,25 @@ namespace FMerge.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            
+
             ConfigManager.SetAppSettings(Configuration.GetSection("AppSettings"));
             ViData.DMHelper.Instance.ExportMapping();
+            // ThreadStart ts = new ThreadStart(startMerge);
+            // Thread th = new Thread(ts);
+            // th.Start();
+        }
+
+        void startMerge()
+        {
+            UserPhotoMergeService x_upService = new UserPhotoMergeService();
+            while (true)
+            {
+                int c = x_upService.PhotoMergeJob();
+                if (c == 0)
+                {
+                    Thread.Sleep(5000);
+                }
+            }
         }
     }
 }

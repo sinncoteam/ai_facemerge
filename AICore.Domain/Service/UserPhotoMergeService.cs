@@ -20,7 +20,7 @@ namespace AICore.Domain.Service
             return item;
         }
 
-        public void PhotoMergeJob()
+        public int PhotoMergeJob()
         {
             string sql = "select * from t_d_userphotomerge where status = 0 and photomodel <> '' order by id limit 10";
             var list = DataHelper.Fill<UserPhotoMergeModel>(sql);
@@ -37,6 +37,7 @@ namespace AICore.Domain.Service
                 }
                 Thread.Sleep(100);
             }
+            return list.Count;
         }
     }
 }

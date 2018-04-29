@@ -56,7 +56,7 @@ namespace AICore.Utils
         {
             string[] strArr = filename.Split('.');
             string name = strArr[strArr.Length-1];
-            return "."+ name;
+            return  name;
         }
     }
 }

@@ -105,7 +105,7 @@ namespace FMerge.Web.Component
             //         return;
             //     }
             //     HttpContext.Current.Session[UserSessionKey] = u;
-            UserModel um = new UserModel(){ Id = userId};
+            UserModel um = new UserModel(){ Id = userId, NickName = "常玉生", openid = "xxxxxxxxxxxx"};
             string umstr = JsonConvert.SerializeObject(um);
             BaseAI.HttpContext.Current.Session.SetString(UserSessionKey,umstr);
         }
