@@ -21,7 +21,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
-FMerge.Web/upload/
+FMerge.Web/wwwroot/upload/
 
 # Visual Studio 2015 cache/options directory
 .vs/
