@@ -38,14 +38,14 @@ namespace AICore.Utils
         }
 
         //threeebase64编码的字符串转为图片  
-        public static Bitmap Base64StringToImage(string strbase64)
+        public static Bitmap Base64StringToImage(string strbase64, string filepath)
         {
             
                 byte[] arr = Convert.FromBase64String(strbase64);
                 MemoryStream ms = new MemoryStream(arr);
                 Bitmap bmp = new Bitmap(ms);
 
-                bmp.Save(@"d:\test.jpg", ImageFormat.Jpeg);
+                bmp.Save(filepath, ImageFormat.Jpeg);
 
                 ms.Close();
                 return bmp;

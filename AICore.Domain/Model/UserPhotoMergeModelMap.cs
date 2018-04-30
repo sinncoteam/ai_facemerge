@@ -14,7 +14,8 @@ namespace AICore.Domain.Model
             Map(a => a.openid);
             Map(a => a.LocalPhotoUrl,"localphotourl");
             Map(a => a.PhotoModel,"photomodel");
-            Map(a => a.PhotoReusltUrl,"photoresulturl");
+            Map(a => a.PhotoResultUrl,"photoresulturl");
+            Map(a => a.PhotoExt, "photoext");
             Map(a => a.Status,"status");
             Map(a => a.StatusSummary,"statussummary");
             Map(a => a.CreateTime,"createtime");

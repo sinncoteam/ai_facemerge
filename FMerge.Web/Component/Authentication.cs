@@ -31,6 +31,8 @@ namespace FMerge.Web.Component
         {
             get
             {
+                return new UserModel() { Id = 1, NickName = "常玉生", UserLogo = "http://xxx.com/a.jpg", RealName = "常玉生", School = "洪庆大学", DateYear = "2018", openid = "xyz" };
+
                 if (!IsLogin)
                 {
                     return null;
@@ -56,6 +58,7 @@ namespace FMerge.Web.Component
         {
             get
             {
+                return true;
                 //return BaseAI.HttpContext.Current.User.Identity.IsAuthenticated;
                 return !string.IsNullOrEmpty(BaseAI.HttpContext.Current.Session.GetString(UserSessionKey));
                 //return HttpContext.Current.Request.IsAuthenticated;

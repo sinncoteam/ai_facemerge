@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Senparc.Weixin.MP.TenPayLibV3;
 
 namespace FMerge.Web
 {
@@ -59,9 +60,10 @@ namespace FMerge.Web
 
             ConfigManager.SetAppSettings(Configuration.GetSection("AppSettings"));
             ViData.DMHelper.Instance.ExportMapping();
-            // ThreadStart ts = new ThreadStart(startMerge);
-            // Thread th = new Thread(ts);
-            // th.Start();
+            RegistWxSDK();
+            ThreadStart ts = new ThreadStart(startMerge);
+            Thread th = new Thread(ts);
+            th.Start();
         }
 
         void startMerge()
@@ -75,6 +77,22 @@ namespace FMerge.Web
                     Thread.Sleep(5000);
                 }
             }
+        }
+
+        /// <summary>
+        /// 注册微信支付
+        /// </summary>
+        private void RegistWxSDK()
+        {
+            var tenPayV3_MchId = ConfigManager.AppSettings("TenPayV3_MchId");
+            var tenPayV3_Key = ConfigManager.AppSettings("TenPayV3_Key");
+            var tenPayV3_AppId = ConfigManager.AppSettings("TenPayV3_AppId");
+            var tenPayV3_AppSecret = ConfigManager.AppSettings("TenPayV3_AppSecret");
+            var tenPayV3_TenpayNotify = ConfigManager.AppSettings("TenPayV3_TenpayNotify");
+
+            var tenPayV3Info = new TenPayV3Info(tenPayV3_AppId, tenPayV3_AppSecret, tenPayV3_MchId, tenPayV3_Key,
+                                                tenPayV3_TenpayNotify);
+            TenPayV3InfoCollection.Register(tenPayV3Info);
         }
     }
 }

@@ -12,7 +12,8 @@ namespace AICore.Domain.Model
 
         public string PhotoModel { get; set; }
 
-        public string PhotoReusltUrl { get; set; }
+        public string PhotoResultUrl { get; set; }
+        public string PhotoExt { get; set; }
 
         // 0 未执行， 1 已合成， 2 合成失败
         public int Status { get; set; }
