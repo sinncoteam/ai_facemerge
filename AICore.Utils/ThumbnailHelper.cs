@@ -54,7 +54,7 @@ namespace AICore.Utils
         /// <param name="fileName">源图片</param>
         /// <param name="newFileName">缩略图保存路径</param>
         /// <param name="width">缩略图宽度</param>
-        public static string MakeThumbnailImage(string fileName, string newFileName, int width)
+        public static int MakeThumbnailImage(string fileName, string newFileName, int width)
         {
             Bitmap bmp = new Bitmap(fileName);
             if (bmp.Width > width)
@@ -66,9 +66,9 @@ namespace AICore.Utils
                 ContentAlignment contentAlignment = ContentAlignment.TopLeft;
                 Bitmap image = Image.Thumbnail(bmp, new Size(width, (int)height), contentAlignment, ThumbnailType.Photo);
                 Image.SaveIamge(image, 80L, newFileName);
-                return newFileName;
+                return 1;
             }
-            return fileName;
+            return 0;
         }
 
         /// <summary>

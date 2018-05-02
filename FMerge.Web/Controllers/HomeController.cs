@@ -17,7 +17,7 @@ namespace FMerge.Web.Controllers
     {
         public IActionResult Index()
         {
-            Authentication.Instance.SetAuth(new UserModel(){ Id = 101, openid ="xxxxxxxxxxx", NickName="长羽生", UserLogo = "http://aaaaaaaaa.com/x.jpg" });
+            //Authentication.Instance.SetAuth(new UserModel(){ Id = 101, openid ="xxxxxxxxxxx", NickName="长羽生", UserLogo = "http://aaaaaaaaa.com/x.jpg" });
             //FaceMergeModel sss = FaceMergeApi.getResult();
             //ViewBag.mm = sss.data.image;
             // ViewBag.kk = ConfigManager.AppSettings("model");

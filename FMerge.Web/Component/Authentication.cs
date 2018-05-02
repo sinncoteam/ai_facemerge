@@ -31,11 +31,13 @@ namespace FMerge.Web.Component
         {
             get
             {
-                return new UserModel() { Id = 1, NickName = "常玉生", UserLogo = "http://xxx.com/a.jpg", RealName = "常玉生", School = "洪庆大学", DateYear = "2018", openid = "xyz" };
+                //return new UserModel() { Id = 1, NickName = "常玉生", UserLogo = "http://xxx.com/a.jpg", RealName = "常玉生", School = "洪庆大学", DateYear = "2018", openid = "xyz" };
 
                 if (!IsLogin)
                 {
-                    return null;
+                    var model = new UserModel();
+                    setSession(model);
+                    return model;
                 }
 
                 string umodel = BaseAI.HttpContext.Current.Session.GetString(UserSessionKey);
@@ -58,7 +60,7 @@ namespace FMerge.Web.Component
         {
             get
             {
-                return true;
+                //return true;
                 //return BaseAI.HttpContext.Current.User.Identity.IsAuthenticated;
                 return !string.IsNullOrEmpty(BaseAI.HttpContext.Current.Session.GetString(UserSessionKey));
                 //return HttpContext.Current.Request.IsAuthenticated;
@@ -84,12 +86,12 @@ namespace FMerge.Web.Component
             // BaseAI.HttpContext.Current.Authentication.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new System.Security.Claims.ClaimsPrincipal(){ 
                 
             //  } );
-            SetSession(uid);
+            //SetSession(uid);
         }
 
         public void RefreshSession(int userId)
         {
-            SetSession(userId);           
+            //SetSession(userId);           
         }
 
 
@@ -98,19 +100,26 @@ namespace FMerge.Web.Component
         ///保存用户状态
         /// </summary>
         /// <param name="userId"></param>
-        void SetSession(int userId)
+        // void SetSession(int userId)
+        // {
+        //     //     UserInfo u = omService.GetById(userId);
+        //     //     if (u == null)
+        //     //     {
+        //     //         if (System.Web.HttpContext.Current.Request.Path != null && !System.Web.HttpContext.Current.Request.Path.ToLower().Contains("user/logout"))
+        //     //             System.Web.HttpContext.Current.Response.Redirect("/user/logout");
+        //     //         return;
+        //     //     }
+        //     //     HttpContext.Current.Session[UserSessionKey] = u;
+        //     UserModel um = new UserModel(){ Id = userId, NickName = "常玉生", openid = "xxxxxxxxxxxx"};
+        //     string umstr = JsonConvert.SerializeObject(um);
+        //     BaseAI.HttpContext.Current.Session.SetString(UserSessionKey,umstr);
+        // }
+
+        public void setSession(UserModel model)
         {
-            //     UserInfo u = omService.GetById(userId);
-            //     if (u == null)
-            //     {
-            //         if (System.Web.HttpContext.Current.Request.Path != null && !System.Web.HttpContext.Current.Request.Path.ToLower().Contains("user/logout"))
-            //             System.Web.HttpContext.Current.Response.Redirect("/user/logout");
-            //         return;
-            //     }
-            //     HttpContext.Current.Session[UserSessionKey] = u;
-            UserModel um = new UserModel(){ Id = userId, NickName = "常玉生", openid = "xxxxxxxxxxxx"};
-            string umstr = JsonConvert.SerializeObject(um);
-            BaseAI.HttpContext.Current.Session.SetString(UserSessionKey,umstr);
+            model.openid = "xyz";
+            string modelstr = JsonConvert.SerializeObject(model);
+            BaseAI.HttpContext.Current.Session.SetString(UserSessionKey,modelstr);
         }
 
     }

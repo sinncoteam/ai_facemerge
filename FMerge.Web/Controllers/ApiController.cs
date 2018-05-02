@@ -17,7 +17,7 @@ using FMerge.Web.BaseAI;
 
 namespace FMerge.Web.Controllers
 {
-    [AuthLogin]
+    //[AuthLogin]
     public class ApiController : BaseController
     {
         private readonly IHostingEnvironment _hostingEnvironment;
@@ -36,7 +36,6 @@ namespace FMerge.Web.Controllers
             //    nickname = "常玉生",
             //    userlogo = ""
             //};
-            Authentication.Instance.SetAuth(new UserModel() { Id = 1 });
             msg.source = new WxUserModel()
             {
                 id = this.CurrentUser.Id,
@@ -51,22 +50,29 @@ namespace FMerge.Web.Controllers
         {
             AjaxMsgResult msg = new AjaxMsgResult();
             UserService x_uService = new UserService();
-            int i = 1;
-            i = x_uService.Update(() => new UserModel() { RealName = realname, School = school, DateYear = dateyear }, a => a.openid == openid);
-            if (i > 0)
+            //int i = 1;
+            //i = x_uService.Update(() => new UserModel() { RealName = realname, School = school, DateYear = dateyear }, a => a.openid == openid);
+            Authentication.Instance.setSession(new UserModel()
             {
-                msg.success = 1;
-                msg.code = "success";
-            }
-            else
-            {
-                msg.code = "fail";
-                msg.msg = "设置用户信息失败，请稍后再试";
-            }
+                openid = CurrentUser.openid,
+                RealName = realname,
+                School = school,
+                DateYear = dateyear
+            });
+            // if (i > 0)
+            // {
+            msg.success = 1;
+            msg.code = "success";
+            // }
+            // else
+            // {
+            //     msg.code = "fail";
+            //     msg.msg = "设置用户信息失败，请稍后再试";
+            // }
             return Json(msg);
         }
 
- 
+
         public IActionResult setOriPhoto()
         {
             var files = Request.Form.Files;
@@ -97,13 +103,17 @@ namespace FMerge.Web.Controllers
                 filePath += newFileName;
                 oriPath += newFileName;
                 flethumlPath += thbumlName;
-                thumlPath +=  thbumlName;
-                
+                thumlPath += thbumlName;
+
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     formFile.CopyTo(stream);
                 }
-                ThumbnailHelper.MakeThumbnailImage(filePath, flethumlPath, 600);
+                int img = ThumbnailHelper.MakeThumbnailImage(filePath, flethumlPath, 600);
+                if( img == 0)
+                {
+                    thumlPath = oriPath;
+                }
 
                 UserPhotoMergeModel x_upModel = new UserPhotoMergeModel();
                 //x_upModel.UserId = 99;
@@ -122,7 +132,7 @@ namespace FMerge.Web.Controllers
                 AjaxMsgResult msg = new AjaxMsgResult() { success = 1, source = new { photoid = i, purl = thumlPath } };
                 return Json(msg);
             }
-            AjaxMsgResult msg2 = new AjaxMsgResult() { success = 0, msg = "请上传1张照片"};
+            AjaxMsgResult msg2 = new AjaxMsgResult() { success = 0, msg = "请上传1张照片" };
             return Json(msg2);
         }
 
@@ -138,7 +148,7 @@ namespace FMerge.Web.Controllers
             result.success = 1;
             result.msg = "照片正在合成中，请稍候";
             result.source = new { realname = CurrentUser.RealName, school = CurrentUser.School, dateyear = CurrentUser.DateYear };
-            //result.source = new { realname = "常玉生", school = "重庆大学", dateyear = "2018" };
+            
             return Json(result);
         }
 
