@@ -23,5 +23,9 @@ namespace AICore.Domain.Model
         public DateTime CreateTime { get; set; }
 
         public DateTime MergeTime { get; set; }
+
+        public string RealName { get; set; }
+        public string School { get; set; }
+        public string DateYear { get; set; }
     }
 }

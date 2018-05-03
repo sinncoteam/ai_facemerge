@@ -5,6 +5,7 @@ using ViData;
 using AICore.Api.FaceMerge;
 using System.Threading;
 using AICore.Utils;
+using System.IO;
 
 namespace AICore.Domain.Service
 {
@@ -32,6 +33,10 @@ namespace AICore.Domain.Service
                     try
                     {
                         string localurl = ConfigManager.AppSettings("webroot") + item.LocalPhotoUrl;
+                        if( !File.Exists(localurl))
+                        {
+                            this.Delete(a => a.Id == item.Id);
+                        }
                         FaceMergeModel pmodel = FaceMergeApi.getResult(localurl, item.PhotoModel);
                         if (pmodel.ret == 0)
                         {

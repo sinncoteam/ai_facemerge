@@ -20,6 +20,9 @@ namespace AICore.Domain.Model
             Map(a => a.StatusSummary,"statussummary");
             Map(a => a.CreateTime,"createtime");
             Map(a => a.MergeTime,"mergetime");
+            Map(a => a.RealName,"realname");
+            Map(a => a.School,"school");
+            Map(a => a.DateYear,"dateyear");
         }
     }
 }

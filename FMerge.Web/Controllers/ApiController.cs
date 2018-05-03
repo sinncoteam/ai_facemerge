@@ -141,7 +141,10 @@ namespace FMerge.Web.Controllers
             UserPhotoMergeService x_upService = new UserPhotoMergeService();
             x_upService.Update(() => new UserPhotoMergeModel()
             {
-                PhotoModel = photomodel
+                PhotoModel = photomodel,
+                RealName = CurrentUser.RealName,
+                School = CurrentUser.School,
+                DateYear = CurrentUser.DateYear
             }, a => a.Id == photoid && a.openid == openid);
 
             AjaxMsgResult result = new AjaxMsgResult();
@@ -161,7 +164,7 @@ namespace FMerge.Web.Controllers
             {
                 result.success = 1;
                 result.msg = "合成成功";
-                result.source = new { realname = CurrentUser.RealName, school = CurrentUser.School, dateyear = CurrentUser.DateYear, photo = item.PhotoResultUrl };
+                result.source = new { realname = item.RealName, school = item.School, dateyear = item.DateYear, photo = item.PhotoResultUrl };
             }
             else
             {
@@ -175,11 +178,11 @@ namespace FMerge.Web.Controllers
             return Json(result);
         }
 
-        public IActionResult getWxJsSDK()
+        public IActionResult getWxJsSDK(string url)
         {
             AjaxMsgResult result = new AjaxMsgResult();
             result.success = 1;
-            result.source = WeixinHelper.wxjsApiPay();
+            result.source = WeixinHelper.wxjsApiPay(url);
             return Json(result);
         }
     }

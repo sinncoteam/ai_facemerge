@@ -1,6 +1,8 @@
 ﻿using AICore.Utils;
 using Senparc.Weixin.MP.CommonAPIs;
+using Senparc.Weixin.MP.Containers;
 using Senparc.Weixin.MP.Entities;
+using Senparc.Weixin.MP.Helpers;
 using Senparc.Weixin.MP.TenPayLibV3;
 using System;
 using System.Collections.Generic;
@@ -23,29 +25,39 @@ namespace FMerge.Web.BaseAI
                 return _tenPayV3Info;
             }
         }
-        public static WxJsInfo wxjsApiPay()
+        public static WxJsInfo wxjsApiPay(string url)
         {
-            string timeStamp = TenPayV3Util.GetTimestamp();
-            string nonceStr = TenPayV3Util.GetNoncestr();
-            JsApiTicketResult wxTicket = CacheService.GetCache(ConstHelper.WxTicketKey) as JsApiTicketResult;
-            if (wxTicket == null)
-            {
-                wxTicket = CommonApi.GetTicket(tenPayV3Info.AppId, tenPayV3Info.AppSecret);
-                CacheService.SetChache(ConstHelper.WxTicketKey, wxTicket, wxTicket.expires_in - 120);
-            }
-            string url =  HttpContext.Current.Request.Path;
-            Senparc.Weixin.MP.TenPayLib.RequestHandler nativeHandler = new Senparc.Weixin.MP.TenPayLib.RequestHandler(null);
-            nativeHandler.SetParameter("jsapi_ticket", wxTicket.ticket);
-            nativeHandler.SetParameter("noncestr", nonceStr);
-            nativeHandler.SetParameter("timestamp", timeStamp);
-            nativeHandler.SetParameter("url", url);
-            string sign = nativeHandler.CreateSHA1Sign();
+            //string url = HttpContext.Current.Request.Path.ToString().Split('#')[0];
+            //获取时间戳  
+            var timestamp = JSSDKHelper.GetTimestamp();
+            //获取随机码  
+            var nonceStr = JSSDKHelper.GetNoncestr();
+            string ticket = JsApiTicketContainer.TryGetJsApiTicket(tenPayV3Info.AppId, tenPayV3Info.AppSecret);
+            //获取签名  
+            var signature = JSSDKHelper.GetSignature(ticket, nonceStr, timestamp, url);
+
+            // string timeStamp = TenPayV3Util.GetTimestamp();
+            // string nonceStr = TenPayV3Util.GetNoncestr();
+            // JsApiTicketResult wxTicket = CacheService.GetCache(ConstHelper.WxTicketKey) as JsApiTicketResult;
+            // if (wxTicket == null)
+            // {
+            //     wxTicket = CommonApi.GetTicket(tenPayV3Info.AppId, tenPayV3Info.AppSecret);
+            //     CacheService.SetChache(ConstHelper.WxTicketKey, wxTicket, wxTicket.expires_in - 120);
+            // }
+
+            // Senparc.Weixin.MP.TenPayLib.RequestHandler nativeHandler = new Senparc.Weixin.MP.TenPayLib.RequestHandler(null);
+            // nativeHandler.SetParameter("jsapi_ticket", wxTicket.ticket);
+            // nativeHandler.SetParameter("noncestr", nonceStr);
+            // nativeHandler.SetParameter("timestamp", timeStamp);
+            // nativeHandler.SetParameter("url", url);
+            // string sign = nativeHandler.CreateSHA1Sign();
             return new WxJsInfo()
             {
                 AppId = tenPayV3Info.AppId,
                 Noncestr = nonceStr,
-                Timestamp = timeStamp,
-                Signature = sign
+                Timestamp = timestamp,
+                Signature = signature,
+                Url = url
             };
         }
     }
@@ -56,5 +68,6 @@ namespace FMerge.Web.BaseAI
         public string Noncestr { get; set; }
         public string Timestamp { get; set; }
         public string Signature { get; set; }
+        public string Url {get;set;}
     }
 }
