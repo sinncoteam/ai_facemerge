@@ -159,17 +159,34 @@ namespace FMerge.Web.Controllers
         {
             AjaxMsgResult result = new AjaxMsgResult();
             UserPhotoMergeService x_upService = new UserPhotoMergeService();
-            var item = x_upService.Get(a => a.Status == 1 && a.Id == photoid).FirstOrDefault();
+            var item = x_upService.Get(a => a.Id == photoid).FirstOrDefault();
             if (item != null)
             {
+                if( item.Status == 1)
+                {
                 result.success = 1;
                 result.msg = "合成成功";
-                result.source = new { realname = item.RealName, school = item.School, dateyear = item.DateYear, photo = item.PhotoResultUrl };
+                }
+                else if( item.Status == 2)
+                {
+                    result.success = 0;
+                    result.msg = "合成失败，上传的照片必须包含正面人脸照、不露齿、无遮挡、无闭眼、光线均匀，请重新上传";
+                }
+                else{
+                    result.success = 0;
+                    result.msg = "照片合成中";
+                }
+                string url = item.PhotoResultUrl;
+                if( string.IsNullOrEmpty(url))
+                {
+                    url = "";
+                }
+                result.source = new { realname = item.RealName, school = item.School, dateyear = item.DateYear, photo = url };
             }
             else
             {
                 result.success = 0;
-                result.msg = "照片合成中";
+                result.msg = "合成失败，上传的照片必须包含正面人脸照、不露齿、无遮挡、无闭眼、光线均匀，请重新上传";
                 result.source = new { realname = CurrentUser.RealName, school = CurrentUser.School, dateyear = CurrentUser.DateYear, photo = "" };
             }
             //result.success = 1;
