@@ -57,6 +57,24 @@ namespace AICore.Utils
         public static int MakeThumbnailImage(string fileName, string newFileName, int width)
         {
             Bitmap bmp = new Bitmap(fileName);
+            int rotate = 0;
+            foreach (var prop in bmp.PropertyItems)
+            {
+                if (prop.Id == 0x112)
+                {
+                    if (prop.Value[0] == 6)
+                        rotate = 90;
+                    if (prop.Value[0] == 8)
+                        rotate = -90;
+                    if (prop.Value[0] == 3)
+                        rotate = 180;
+                        break;
+                }
+            }
+            if( rotate != 0)
+            {
+                bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            }
             if (bmp.Width > width)
             {
                 double scale = (double)bmp.Width / width;

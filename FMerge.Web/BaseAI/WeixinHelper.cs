@@ -34,7 +34,16 @@ namespace FMerge.Web.BaseAI
             var nonceStr = JSSDKHelper.GetNoncestr();
             string ticket = JsApiTicketContainer.TryGetJsApiTicket(tenPayV3Info.AppId, tenPayV3Info.AppSecret);
             //获取签名  
-            var signature = JSSDKHelper.GetSignature(ticket, nonceStr, timestamp, url);
+            
+            string photoid = "";
+            string[] idarr = url.Split('=');
+            string localurl = "";
+            if(idarr.Length > 1)
+            {
+                photoid = idarr[1];
+                localurl = "http://hlbyj.xintiannet.com/#/myGraduationPhoto?photoid="+photoid;
+            }
+            var signature = JSSDKHelper.GetSignature(ticket, nonceStr, timestamp, localurl);
 
             // string timeStamp = TenPayV3Util.GetTimestamp();
             // string nonceStr = TenPayV3Util.GetNoncestr();

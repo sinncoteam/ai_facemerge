@@ -186,7 +186,7 @@ namespace FMerge.Web.Controllers
             else
             {
                 result.success = 0;
-                result.msg = "合成失败，上传的照片必须包含正面人脸照、不露齿、无遮挡、无闭眼、光线均匀，请重新上传";
+                result.msg = "合成失败，上传的照片必须包含正面人脸照、不露齿、无遮挡、无闭眼、光线均匀，请重新上传！";
                 result.source = new { realname = CurrentUser.RealName, school = CurrentUser.School, dateyear = CurrentUser.DateYear, photo = "" };
             }
             //result.success = 1;
