@@ -50,9 +50,15 @@ namespace AICore.Domain.Service
                             string resultpath2 = "/upload/" + item.UserId + "/" + guid + "_x." + item.PhotoExt;
                             string resulturl2 = webroot + resultpath2;
 
-                            AICore.Utils.ImageBase64Helper.Base64StringToImage(pmodel.data.image, resulturl);
+                            ImageBase64Helper.Base64StringToImage(pmodel.data.image, resulturl);
                             try
                             {
+                                string resulturlSpecial = resulturl + "." + item.PhotoExt;
+                                int r = ThumbnailHelper.MakeThumbnailImage(resulturl, resulturlSpecial, 579);
+                                if(r == 1)
+                                {
+                                    resulturl = resulturlSpecial;
+                                }
                                 setLocalMerge(resulturl2, resulturl, webroot + "/qr.png", item.RealName, item.DateYear, item.School);
                             }
                             catch { }
@@ -88,8 +94,8 @@ namespace AICore.Domain.Service
             fs1.FileName = photopath;
             FileMergeSize fs2 = new FileMergeSize();
             fs2.FileName = qrpath;
-            fs2.X = 420;
-            fs2.Y = 540;
+            fs2.X = 440;
+            fs2.Y = 550;
             fslist.Add(fs1);
             fslist.Add(fs2);
             List<FontTextSize> ftlist = new List<FontTextSize>();
@@ -114,12 +120,18 @@ namespace AICore.Domain.Service
             ft5.X = 96;
             ft5.Y = 620;
             ft5.TextBrush = new SolidBrush(Color.Red);
+            FontTextSize ft6 = new FontTextSize();
+            ft6.Text = "我的毕业照";
+            ft6.X = 440;
+            ft6.Y = 525;
+            ft6.TextFont = new Font("微软雅黑", 20);
 
             ftlist.Add(ft1);
             ftlist.Add(ft2);
             ftlist.Add(ft3);
             ftlist.Add(ft4);
             ftlist.Add(ft5);
+            ftlist.Add(ft6);
             ImageHelper.MergeImage(fs, fslist, ftlist);
         }
     }
